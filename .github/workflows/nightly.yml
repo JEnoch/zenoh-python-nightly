@@ -1,8 +1,8 @@
 name: Nightly release
 
 on:
-  # schedule:
-  #   - cron: "0 1 * * 1-5"
+  schedule:
+    - cron: "0 1 * * 1-5"
   workflow_dispatch:
 
 jobs:
@@ -29,7 +29,7 @@ jobs:
         run: python setup.py sdist
       - uses: actions/upload-artifact@v2
         with:
-          name: Sources
+          name: wheels
           path: ./dist/*
 
   build_wheels:
@@ -107,5 +107,21 @@ jobs:
           CIBW_BEFORE_BUILD: pip install -U setuptools-rust
       - uses: actions/upload-artifact@v2
         with:
-          name: Wheels
+          name: wheels
           path: ./wheelhouse/*.whl
+
+  deploy-wheels:
+    needs: [sdist, build_wheels]
+    name: deploy wheels to pypi
+    runs-on: ubuntu-18.04
+
+    steps:
+      - uses: actions/download-artifact@v2
+        with:
+          name: wheels
+          path: dist
+
+      - uses: pypa/gh-action-pypi-publish@master
+        with:
+          user: __token__
+          password: ${{ secrets.PYPI_API_TOKEN }}
