@@ -16,9 +16,8 @@ jobs:
       - name: Change package name and version
         shell: bash
         run: |
-          sed -i "" "s/name=\"eclipse-zenoh\"/name=\"eclipse-zenoh-nightly\"/" setup.py
-          DATE=$(date +%Y%m%d)
-          sed -i "" "s/version=\"\(.*\)0\"/version=\"\1${DATE}\"/" setup.py
+          wget https://raw.githubusercontent.com/JEnoch/zenoh-python-nightly/main/change-setup.py
+          python change-setup.py
       - uses: actions/setup-python@v2
         name: Install Python
         with:
@@ -83,9 +82,8 @@ jobs:
       - name: Change package name and version
         shell: bash
         run: |
-          sed -i "" "s/name=\"eclipse-zenoh\"/name=\"eclipse-zenoh-nightly\"/" setup.py
-          DATE=$(date +%Y%m%d)
-          sed -i "" "s/version=\"\(.*\)0\"/version=\"\1${DATE}\"/" setup.py
+          wget https://raw.githubusercontent.com/JEnoch/zenoh-python-nightly/main/change-setup.py
+          python change-setup.py
       - name: Set up QEMU
         if: matrix.job.os == 'Linux'
         uses: docker/setup-qemu-action@v1
