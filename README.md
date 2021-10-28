@@ -1,2 +1,2 @@
 # zenoh-python-nightly
-Nightly build of eclipse-zenoh/zenoh-python
+Nightly builds of [eclipse-zenoh/zenoh-python](https://github.com/eclipse-zenoh/zenoh-python)
