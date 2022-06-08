@@ -9,37 +9,6 @@ env:
   PYTHON_VERSION: "3.7"
 
 jobs:
-  sdist:
-    name: Build sdist
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          repository: JEnoch/zenoh-python
-          ref: test-PR-maturin
-      - uses: actions/checkout@v2
-        with:
-          path: nightly
-      - name: Change package name and version
-        shell: bash
-        run: python nightly/change-pyproject.py
-      - uses: actions/setup-python@v2
-        name: Install Python
-        with:
-          python-version: "3.9"
-      - name: Install deps
-        run: pip install -U twine
-      - name: Build sdist
-        uses: messense/maturin-action@v1
-        with:
-          args: --interpreter --out dist
-      - name: Check dist
-        run: ls -al ./dist/*
-      - uses: actions/upload-artifact@v2
-        with:
-          name: wheels
-          path: ./dist/*
-
   macos:
     runs-on: macos-latest
     steps:
@@ -67,7 +36,7 @@ jobs:
         uses: messense/maturin-action@v1
         with:
           target: x86_64
-          args: --release --out dist
+          args: --release --out dist # Note: this step builds also the sources distrib
       - name: Build wheels - universal2
         uses: messense/maturin-action@v1
         with:
@@ -113,6 +82,7 @@ jobs:
           args: --release --out dist --no-sdist
       - name: Check dist
         run: ls -al ./dist/*
+        shell: bash
       - name: Upload wheels
         uses: actions/upload-artifact@v2
         with:
