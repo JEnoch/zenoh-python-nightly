@@ -157,7 +157,7 @@ jobs:
           path: dist
 
   deploy-wheels:
-    needs: [sdist, macos, windows, linux, linux-cross]
+    needs: [macos, windows, linux, linux-cross]
     name: deploy wheels to pypi
     runs-on: ubuntu-18.04
 
