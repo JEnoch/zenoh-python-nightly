@@ -14,8 +14,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          repository: JEnoch/zenoh-python
-          ref: test-PR-maturin
+          repository: eclipse-zenoh/zenoh-python
       - uses: actions/checkout@v2
         with:
           path: nightly
