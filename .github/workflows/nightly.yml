@@ -22,7 +22,7 @@ jobs:
           path: nightly
       - name: Change package name and version
         shell: bash
-        run: python nightly/change-setup.py
+        run: python nightly/change-pyproject.py
       - uses: actions/setup-python@v2
         name: Install Python
         with:
@@ -44,6 +44,15 @@ jobs:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
+        with:
+          repository: JEnoch/zenoh-python
+          ref: test-PR-maturin
+      - uses: actions/checkout@v2
+        with:
+          path: nightly
+      - name: Change package name and version
+        shell: bash
+        run: python nightly/change-pyproject.py
       - uses: actions/setup-python@v2
         with:
           python-version: ${{ env.PYTHON_VERSION }}
@@ -78,6 +87,15 @@ jobs:
         target: [x64, x86]
     steps:
       - uses: actions/checkout@v2
+        with:
+          repository: JEnoch/zenoh-python
+          ref: test-PR-maturin
+      - uses: actions/checkout@v2
+        with:
+          path: nightly
+      - name: Change package name and version
+        shell: bash
+        run: python nightly/change-pyproject.py
       - uses: actions/setup-python@v2
         with:
           python-version: ${{ env.PYTHON_VERSION }}
@@ -108,6 +126,15 @@ jobs:
         target: [x86_64, i686]
     steps:
       - uses: actions/checkout@v2
+        with:
+          repository: JEnoch/zenoh-python
+          ref: test-PR-maturin
+      - uses: actions/checkout@v2
+        with:
+          path: nightly
+      - name: Change package name and version
+        shell: bash
+        run: python nightly/change-pyproject.py
       - uses: actions/setup-python@v2
         with:
           python-version: ${{ env.PYTHON_VERSION }}
@@ -133,6 +160,15 @@ jobs:
         target: [aarch64, armv7]
     steps:
       - uses: actions/checkout@v2
+        with:
+          repository: JEnoch/zenoh-python
+          ref: test-PR-maturin
+      - uses: actions/checkout@v2
+        with:
+          path: nightly
+      - name: Change package name and version
+        shell: bash
+        run: python nightly/change-pyproject.py
       - uses: actions/setup-python@v2
         with:
           python-version: ${{ env.PYTHON_VERSION }}
