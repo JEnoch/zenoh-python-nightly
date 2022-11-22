@@ -21,7 +21,7 @@ jobs:
       - name: Change package name and version
         shell: bash
         run: python nightly/change-pyproject.py
-      - uses: actions/setup-python@v2
+      - uses: actions/setup-python@v3
         with:
           python-version: ${{ env.PYTHON_VERSION }}
           architecture: x64
@@ -63,7 +63,7 @@ jobs:
       - name: Change package name and version
         shell: bash
         run: python nightly/change-pyproject.py
-      - uses: actions/setup-python@v2
+      - uses: actions/setup-python@v3
         with:
           python-version: ${{ env.PYTHON_VERSION }}
           architecture: ${{ matrix.target }}
@@ -102,7 +102,7 @@ jobs:
       - name: Change package name and version
         shell: bash
         run: python nightly/change-pyproject.py
-      - uses: actions/setup-python@v2
+      - uses: actions/setup-python@v3
         with:
           python-version: ${{ env.PYTHON_VERSION }}
           architecture: x64
@@ -135,7 +135,7 @@ jobs:
       - name: Change package name and version
         shell: bash
         run: python nightly/change-pyproject.py
-      - uses: actions/setup-python@v2
+      - uses: actions/setup-python@v3
         with:
           python-version: ${{ env.PYTHON_VERSION }}
       - name: Build wheels
@@ -164,7 +164,7 @@ jobs:
       - name: Change package name and version
         shell: bash
         run: python nightly/change-pyproject.py
-      - uses: actions/setup-python@v2
+      - uses: actions/setup-python@v3
         with:
           python-version: ${{ env.PYTHON_VERSION }}
       - name: Install Rust toolchain
