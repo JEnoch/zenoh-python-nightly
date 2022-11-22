@@ -78,7 +78,7 @@ jobs:
         uses: messense/maturin-action@v1
         with:
           target: ${{ matrix.target }}
-          args: --release --out dist --no-sdist
+          args: --release --out dist --no-sdist -i python3.9
       - name: Check dist
         run: ls -al ./dist/*
         shell: bash
@@ -173,7 +173,7 @@ jobs:
           export CXX_arm_unknown_linux_gnueabihf=arm-unknown-linux-gnueabihf-g++
           export AR_arm_unknown_linux_gnueabihf=arm-unknown-linux-gnueabihf-ar
           export CARGO_TARGET_ARM_UNKNOWN_LINUX_GNUEABIHF_LINKER=arm-unknown-linux-gnueabihf-gcc
-          pip3 install maturin
+          pip3 install maturin==0.12.20
           maturin build --release --target arm-unknown-linux-gnueabihf --out dist
       - name: Upload wheels
         uses: actions/upload-artifact@v2
