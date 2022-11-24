@@ -78,7 +78,7 @@ jobs:
         uses: messense/maturin-action@v1
         with:
           target: ${{ matrix.target }}
-          args: --release --out dist --no-sdist -i python3.9
+          args: --release --out dist --no-sdist -i python3.10
       - name: Check dist
         run: ls -al ./dist/*
         shell: bash
