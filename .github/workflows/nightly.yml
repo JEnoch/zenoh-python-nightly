@@ -136,19 +136,19 @@ jobs:
           name: wheels
           path: dist
 
-  # deploy-wheels:
-  #   needs: [macos, windows, linux, linux-armv6]
-  #   name: deploy wheels to pypi
-  #   runs-on: ubuntu-18.04
+  deploy-wheels:
+    needs: [macos, windows, linux, linux-armv6]
+    name: deploy wheels to pypi
+    runs-on: ubuntu-18.04
 
-  #   steps:
-  #     - uses: actions/download-artifact@v2
-  #       with:
-  #         name: wheels
-  #         path: dist
-  #     - name: Check dist
-  #       run: ls -al ./dist/*
-  #     - uses: pypa/gh-action-pypi-publish@master
-  #       with:
-  #         user: __token__
-  #         password: ${{ secrets.PYPI_API_TOKEN }}
+    steps:
+      - uses: actions/download-artifact@v2
+        with:
+          name: wheels
+          path: dist
+      - name: Check dist
+        run: ls -al ./dist/*
+      - uses: pypa/gh-action-pypi-publish@master
+        with:
+          user: __token__
+          password: ${{ secrets.PYPI_API_TOKEN }}
