@@ -45,7 +45,8 @@ jobs:
     runs-on: windows-latest
     strategy:
       matrix:
-        target: [x64, x86]
+        target: [x64]
+        # target: [x64, x86]   NOTE: x86 deactivated because of strange error: failed to run custom build command for `pyo3-ffi v0.17.1`
     steps:
       - uses: actions/checkout@v2
         with:
@@ -173,7 +174,7 @@ jobs:
           export CXX_arm_unknown_linux_gnueabihf=arm-unknown-linux-gnueabihf-g++
           export AR_arm_unknown_linux_gnueabihf=arm-unknown-linux-gnueabihf-ar
           export CARGO_TARGET_ARM_UNKNOWN_LINUX_GNUEABIHF_LINKER=arm-unknown-linux-gnueabihf-gcc
-          pip3 install maturin==0.12.20
+          pip3 install maturin
           maturin build --release --target arm-unknown-linux-gnueabihf --out dist
       - name: Upload wheels
         uses: actions/upload-artifact@v2
@@ -181,19 +182,19 @@ jobs:
           name: wheels
           path: dist
 
-  deploy-wheels:
-    needs: [macos, windows, linux, linux-cross, linux-armv6]
-    name: deploy wheels to pypi
-    runs-on: ubuntu-18.04
+  # deploy-wheels:
+  #   needs: [macos, windows, linux, linux-cross, linux-armv6]
+  #   name: deploy wheels to pypi
+  #   runs-on: ubuntu-18.04
 
-    steps:
-      - uses: actions/download-artifact@v2
-        with:
-          name: wheels
-          path: dist
-      - name: Check dist
-        run: ls -al ./dist/*
-      - uses: pypa/gh-action-pypi-publish@master
-        with:
-          user: __token__
-          password: ${{ secrets.PYPI_API_TOKEN }}
+  #   steps:
+  #     - uses: actions/download-artifact@v2
+  #       with:
+  #         name: wheels
+  #         path: dist
+  #     - name: Check dist
+  #       run: ls -al ./dist/*
+  #     - uses: pypa/gh-action-pypi-publish@master
+  #       with:
+  #         user: __token__
+  #         password: ${{ secrets.PYPI_API_TOKEN }}
